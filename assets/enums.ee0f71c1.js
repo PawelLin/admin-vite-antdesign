@@ -1,0 +1,1 @@
+import{a}from"./index.544f6c89.js";const e=[{key:"ui",value:"UI\u5E93"},{key:"framework",value:"\u6846\u67B6"},{key:"npm",value:"NPM\u5305"}],o=a(e),u={ui:"pink",framework:"green",npm:"orange"};export{e as T,u as a,o as b};
