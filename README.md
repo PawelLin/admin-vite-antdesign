@@ -1,16 +1,76 @@
-# Vue 3 + TypeScript + Vite
+# admin-vite-antdesign
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## 简介
+admin-vite-antdesign是基于Vue3，由Vite+Ant Design构建的一套管理端模板。
+[在线访问](https://admin-vite-antdesign.vercel.app/)
+## 整体模块
 
-## Recommended IDE Setup
+## 请求模块
+请求公共数据类型定义
+```js
+// @/libs/axios/api.ts
+import { AxiosResponse } from 'axios'
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+export interface ResponsePage {
+    page: {
+        current: number
+        total: number
+    }
+}
+export interface ResponseData<T> {
+    code: string
+    data?: T
+    message?: string
+}
+export interface API {
+    '/resource': {
+        request: null
+        response: ResponseData<{
+            menus: []
+            buttons: []
+        }>
+    }
+}
+export type Request<T extends keyof API> = API[T]['request'] | null
+export type Response<T extends keyof API> = AxiosResponse<API[T]['response']>
+```
+### Basic Usage
+在相应功能下新增model.ts文件定义数据类型及请求
+```js
+// model.ts
+export interface SearchForm {
+    name: string
+    type: string
+    address: string
+}
+export interface Form extends SearchForm {
+    id: number | undefined
+}
+declare module '@/libs/axios/api' {
+    interface API {
+        '/demo/list': {
+            request: SearchForm & { current: number }
+            response: ResponseData<Form[]> & ResponsePage
+        }
+        '/demo/add': {
+            request: Form
+            response: null
+        }
+    }
+}
+```
 
-## Type Support For `.vue` Imports in TS
+## 开发模板
+```shell
+.
+└─ demo
+    ├── enums.ts      枚举定义
+    ├── FormDemo.vue  表单页面
+    ├── List.vue      列表页面
+    └── model.ts      数据类型及接口定义
+```
+## 自定义组件
+### CustomIcon
+### IconfontIcon
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
-
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
-
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+## 自定义主题色

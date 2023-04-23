@@ -6,7 +6,7 @@ export default {
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import type { TableColumnsType } from 'ant-design-vue'
+import type { TableColumnsType, TablePaginationConfig } from 'ant-design-vue'
 import { SearchForm, Form } from './model'
 import { TYPE_ENUMS, TYPE_LIST, TYPE_COLORS } from './enums'
 import http from '@/libs/axios'
@@ -15,7 +15,7 @@ const form = reactive<SearchForm>({
     type: '',
     address: '',
 })
-const pagination = reactive({
+const pagination: TablePaginationConfig = reactive({
     current: 1,
     total: 0,
     size: 'default',

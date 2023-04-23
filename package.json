@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "dev:proxy": "vite --mode=proxy",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vue-tsc --noEmit && vite build --base=/admin-vite-antdesign/",
+    "deploy": "sh deploy.sh",
     "preview": "vite preview"
   },
   "dependencies": {

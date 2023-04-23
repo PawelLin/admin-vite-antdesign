@@ -10,7 +10,7 @@ const props = defineProps<{
     collapsed: boolean
 }>()
 const emit = defineEmits(['update:selectedKeys', 'update:openKeys'])
-const selectedKeysModel = computed({
+const selectedKeysModel = computed<string[]>({
     get() {
         return props.selectedKeys
     },
@@ -18,7 +18,7 @@ const selectedKeysModel = computed({
         emit('update:selectedKeys', value)
     },
 })
-const openKeysModel = computed({
+const openKeysModel = computed<string[]>({
     get() {
         return props.openKeys
     },

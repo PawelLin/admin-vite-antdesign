@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw, createWebHashHistory } from 'vue-router'
 declare module 'vue-router' {
     interface RouteMeta {
         title?: string
@@ -53,7 +53,7 @@ const routes: RouteRecordRaw[] = [
 ]
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(import.meta.env.VITE_BASE_URL),
     routes,
 })
 

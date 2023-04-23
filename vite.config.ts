@@ -1,5 +1,5 @@
 import { resolve } from 'path'
-import { defineConfig, loadEnv, splitVendorChunkPlugin, UserConfigExport } from 'vite'
+import { defineConfig, splitVendorChunkPlugin, UserConfigExport } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'

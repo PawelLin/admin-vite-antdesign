@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { inject, reactive } from 'vue'
 import { ConfigProvider } from 'ant-design-vue'
+import type { RouteLocationRaw } from 'vue-router'
 import { Breadcrumb } from './hooks/model'
 const skinList = ['#1890ff', '#ff4d4f', '#faad14', '#52c41a']
 const theme = reactive({
@@ -20,7 +21,7 @@ const onSkinChange = (type: string, skin: string) => {
         theme,
     })
 }
-const themeName = inject('theme')
+const themeName = inject('theme') as string
 </script>
 
 <template>
@@ -36,7 +37,7 @@ const themeName = inject('theme')
             </div>
             <a-breadcrumb v-if="props.breadcrumbs.length > 1" class="breadcrumb">
                 <a-breadcrumb-item v-for="item in props.breadcrumbs" :key="`${item.id || ''}${item.name}`">
-                    <router-link v-if="item.link" :to="item">
+                    <router-link v-if="item.link" :to="item as RouteLocationRaw">
                         {{ item.title }}
                     </router-link>
                     <span v-else>{{ item.title }}</span>
